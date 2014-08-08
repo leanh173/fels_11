@@ -1,0 +1,12 @@
+<% provide(:title, 'Lessons') %>
+<h1>Lessons</h1>
+<ul class="lesson">
+  <% @lessons.each do |lesson| %>
+    <%= render lesson %>
+    <section>
+    <%= link_to "Start this lesson", '#',
+        class: "btn btn-large btn-primary" %>
+  </section>
+  <% end %>
+</ul>
+<%= will_paginate @lessons%>
