@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806100318) do
+ActiveRecord::Schema.define(version: 20140811012744) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -33,24 +33,26 @@ ActiveRecord::Schema.define(version: 20140806100318) do
 
   create_table "learnings", force: true do |t|
     t.integer  "user_id"
-    t.integer  "lesson_id"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "learnings", ["lesson_id"], name: "index_learnings_on_lesson_id", using: :btree
+  add_index "learnings", ["category_id"], name: "index_learnings_on_category_id", using: :btree
   add_index "learnings", ["user_id"], name: "index_learnings_on_user_id", using: :btree
 
   create_table "lessons", force: true do |t|
+    t.integer  "user_id"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "lessons", ["category_id"], name: "index_lessons_on_category_id", using: :btree
+  add_index "lessons", ["user_id"], name: "index_lessons_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "lesson_id"
+    t.integer  "category_id"
     t.string   "content"
     t.string   "word"
     t.string   "sound"
@@ -58,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140806100318) do
     t.datetime "updated_at"
   end
 
-  add_index "questions", ["lesson_id"], name: "index_questions_on_lesson_id", using: :btree
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["word"], name: "index_questions_on_word", using: :btree
 
   create_table "relationships", force: true do |t|
@@ -73,7 +75,7 @@ ActiveRecord::Schema.define(version: 20140806100318) do
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "user_answers", force: true do |t|
-    t.integer  "learning_id"
+    t.integer  "lesson_id"
     t.integer  "user_id"
     t.integer  "question_id"
     t.integer  "answer_id"

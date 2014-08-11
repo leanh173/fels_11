@@ -1,0 +1,11 @@
+<% if signed_in? %>
+  <li>
+    <h3><%=  category.name_course %></h3>
+    <section>
+      <%= form_for([category,@lesson]) do |f| %>
+        <%= f.hidden_field :category_id, value: category.id %>
+        <%= f.submit "start learning", class: "btn btn-large btn-primary" %>
+      <% end %>
+    </section>
+  </li>
+<% end %>
