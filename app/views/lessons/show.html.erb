@@ -1,2 +1,25 @@
 <% provide(:title, 'Lesson') %>
-<h1>Lesson</h1>
+<h1>Result Lesson</h1>
+<h2><%= @category.name_course %></h2>
+<h2>Mark: <%= @lesson.mark %> / <%= @questions.count %></h2>
+<ul class="lesson">
+  <% @questions.each do |question| %>
+    <li>
+      <%= question.content %>
+      <br>
+      <% current_user_answer = @lesson.user_answers.find_by(question_id: question.id) %>
+      <% if current_user_answer.answer %>
+        <%= current_user_answer.answer.content %>
+        <% if current_user_answer.answer.right_answer %>
+          <%= link_to image_tag("right.jpg", :size => "20x20", alt: "right") %>
+        <% else %>
+          <%= link_to image_tag("wrong.png", :size => "20x20", alt: "wrong") %>
+        <% end %>
+      <% else %>
+        <%= "unkown answer" %>
+        <%= link_to image_tag("wrong.png", :size => "20x20", alt: "wrong") %>
+      <% end %>
+    </li>
+    <br>
+  <% end %>
+</ul>

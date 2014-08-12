@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories, only: [:index] do
-    resources :lessons, only: [:create, :index, :show]
+    resources :lessons
   end
   root 'static_pages#home'
   match '/about',   to: 'static_pages#about',          via: 'get'
