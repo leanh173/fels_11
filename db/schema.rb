@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811012744) do
+ActiveRecord::Schema.define(version: 20140812034555) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140811012744) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mark",        default: 0
   end
 
   add_index "lessons", ["category_id"], name: "index_lessons_on_category_id", using: :btree
