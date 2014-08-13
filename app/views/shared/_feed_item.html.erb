@@ -1,0 +1,13 @@
+<li id="<%= feed_item.id %>">
+  <%= link_to gravatar_for(feed_item.user), feed_item.user %>
+  <span class="user">
+    <%= link_to feed_item.user.name, feed_item.user %>
+  </span>
+  <span class="content">
+    learned <%= feed_item.user_answers.count %> words in Lesson
+    <%= feed_item.category.name_course %>
+  </span>
+  <span class="timestamp">
+    (<%= time_tag(feed_item.created_at, :format => '%Y/%m/%d') %>)
+  </span>
+</li>

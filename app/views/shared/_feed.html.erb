@@ -1,0 +1,7 @@
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <div class="all-lessons">
+      <%= render partial: "shared/feed_item", collection: @feed_items %>
+    </div>
+  </ol>
+<% end %>

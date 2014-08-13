@@ -9,6 +9,11 @@ class Lesson < ActiveRecord::Base
   after_commit :update_mark, on: :update
   accepts_nested_attributes_for :user_answers
   
+  def self.from_users_followed_by(user)
+    followed_user_ids = user.followed_user_ids
+    where("user_id in (?) or user_id = ?", followed_user_ids, user)
+  end
+  
   private
   def generate_user_questions 
     @questions = self.category.questions.limit(20).order("RAND()")
