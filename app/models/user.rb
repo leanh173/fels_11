@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessor :not_validate_password
   has_many :lessons, dependent: :destroy
   has_many :user_answers, dependent: :destroy
+  has_many :questions, through: :user_answers
   has_many :relationships, foreign_key: "follower_id" , dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id",
@@ -24,6 +25,22 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
       Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+
+  def follow(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def feed
+    Lesson.from_users_followed_by(self).order('lessons.created_at DESC')
   end
 
   private

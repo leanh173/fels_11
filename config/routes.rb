@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :relationships , only: [:create , :destroy]
   resources :categories, only: [:index] do
     resources :lessons
   end

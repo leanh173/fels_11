@@ -18,9 +18,6 @@ class LessonsController < ApplicationController
     @questions = @lesson.questions
   end
 
-  def index
-  end
-
   def edit    
     @lesson = Lesson.find params[:id]
     @category = @lesson.category
