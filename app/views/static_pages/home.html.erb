@@ -5,6 +5,8 @@
         <%= render "shared/user_info" %>
       </section>
     </aside>
+    <%= link_to "Word", words_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Lesson", categories_path, class: "btn btn-large btn-primary" %>
     <div class="span8">
       <h3>Activities</h3>
       <%= render "shared/feed" %>
@@ -13,8 +15,7 @@
 <% else %>
   <div class="center hero-unit">
     <h1>Welcome to E-learning</h1>
-    <%= link_to "Sign up now!", signup_path,
-                                class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
   </div>
   <h1>E-Learning</h1>
 <% end %>

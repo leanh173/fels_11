@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :sign_in_user, only: [:edit, :update, :following , :followers]
+  before_action :signed_in_user, only: [:edit, :update]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
   def show
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
                                    :password_confirmation)
   end
 
-  def sign_in_user
+  def signed_in_user
     unless signed_in?
       store_location
       redirect_to signin_url, notice: "Please sign in." 
