@@ -1,0 +1,16 @@
+<% provide(:title, "Word list") %>
+<h1>Word list</h1>
+<%= form_tag( words_path, method: :get) do %>
+  <%= select_tag "category", options_from_collection_for_select(@categories,
+        "id", "name_course", params[:category]), prompt: "All"  %> 
+  <%= submit_tag "filter", class: "btn btn-large btn-" %>
+  <%= radio_button_tag "filter_learn", "all", true  %>
+  <%= "all" %>
+  <%= radio_button_tag "filter_learn", "learned", ("learned" == params[:filter_learn]) %>
+  <%= "learned" %>
+  <%= radio_button_tag "filter_learn", "not-learned", ("not-learned" == params[:filter_learn]) %>
+  <%= "not learned" %>
+<% end %>
+<% unless params[:category].nil? && params[:filter_learn].nil? %>
+  <%= render "word_filtered"%>
+<% end %>

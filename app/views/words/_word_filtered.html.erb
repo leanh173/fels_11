@@ -1,0 +1,6 @@
+<% @resultquestions.distinct.each do |question| %>
+  <br>
+  <%= question.word %> 
+  <%= "-------------" %>    
+  <%= question.content %><br>
+<% end %>
