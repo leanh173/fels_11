@@ -1,0 +1,11 @@
+<% provide(:title, "Word list") %>
+<h1>Word list</h1>
+<%= form_tag( admin_questions_path, method: :get) do %>
+  <%= select_tag "category_id", options_from_collection_for_select(@categories,
+        "id", "name_course", params[:category_id]), prompt: "All"  %> 
+  <%= submit_tag "filter", class: "btn btn-large btn-" %>
+<% end %>
+<% unless params[:category_id].nil? %>
+  <%= render "word_filtered"%>
+  <%= will_paginate %>
+<% end %>

@@ -2,9 +2,15 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships , only: [:create , :destroy]
-  resources :words, only: [:index]
+  resources :questions, only: [:index]
   resources :categories, only: [:index] do
     resources :lessons
+  end
+  namespace :admin do
+    resources :questions
+    resources :sessions, only: [:new, :create, :destroy]
+    match '/signin',   to: 'sessions#new',                via: 'get'
+    match '/signout',  to: 'sessions#destroy',            via: 'delete'
   end
   root 'static_pages#home'
   match '/about',    to: 'static_pages#about',          via: 'get'

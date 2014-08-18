@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   has_many :answers
   belongs_to :category
   validates :word, presence: true
+  accepts_nested_attributes_for :answers
   scope :not_learn_by, ->(user){
     if user.questions.empty?
       not_learn_question_ids = ""

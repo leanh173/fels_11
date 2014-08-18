@@ -1,0 +1,25 @@
+<% provide(:title, "Edit question") %>
+<h1> Update question</h1>
+<div class:"row">
+  <div class = "span6 offset3" >
+  <%= form_for [:admin, @question] do |f| %>
+    <%= render 'shared/error_messages' , object: f.object%>
+    <%= f.label :word %>
+    <%= f.text_field :word %>
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+    <br>
+    <br>
+    <br>
+    <p> Tick for right answer </p>
+    <%= f.fields_for :answers do |builder| %>
+      <tr>
+        <td><%= builder.check_box :right_answer %></td>
+        Option : <td><%= builder.text_field :content %></td>
+        <% builder.hidden_field :answer_id, value: builder.object.id %>
+      </tr>
+    <% end %>
+    <%= f.submit "Update question", class: "btn btn-large btn-" %>
+  <% end %>
+  </div>
+</div>

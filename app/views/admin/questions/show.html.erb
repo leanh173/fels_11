@@ -1,0 +1,20 @@
+<% provide(:title, "Edit user") %>
+<h1> Update question</h1>
+<div class:"row">
+  <div class = "span6 offset3" >
+    Word: <%= @question.word %>
+    <br>
+    Question: <%= @question.content %>
+    <br>
+    <br>
+    <% @answers.each do |answer| %>
+      <% if answer.right_answer %>
+        Right answer is:
+      <% else %>
+        Wrong answer is:
+      <% end %>
+      <%= answer.content %>
+      <br>
+    <% end %>
+  </div>
+</div>
