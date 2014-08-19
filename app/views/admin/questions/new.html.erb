@@ -1,0 +1,26 @@
+<%= provide(:title, "Add question") %>
+<h1>Add question</h1>
+<div class="row">
+  <div class="span6 offset3">
+  <%= form_for [:admin,@question] do |f| %>
+    <%= render 'shared/error_messages', object: f.object%>
+    <%= f.select :category_id, options_from_collection_for_select(@categories,
+          "id", "name_course", params[:category_id]) %>
+    <%= f.label :word %>
+    <%= f.text_field :word %>
+    <%= f.label :question %>
+    <%= f.text_field :content %>
+    <br>
+    <br>
+    <br>
+    <p> Tick for right answer </p>
+    <%= f.fields_for :answers do |builder| %>
+      <tr>
+        <td><%= builder.check_box :right_answer %></td>
+        Option : <td><%= builder.text_field :content %></td>
+      </tr>
+    <% end %>
+    <%= f.submit "Create new question", class: "btn btn-large btn-" %>
+  <% end %>
+  </div>
+</div>

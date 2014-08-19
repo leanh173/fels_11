@@ -1,0 +1,11 @@
+<% @questions.each do |question| %>
+  <br>
+  <%= question.word %> 
+  <%= "-------------" %>    
+  <%= question.content %>
+  <%= link_to "view ", [:admin, question] %>
+  <%= link_to "edit ", edit_admin_question_path(question) %>
+  <%= link_to "delete", [:admin, question], method: :delete,
+               data: {confirm: "You sure?"} %>
+  <br>
+<% end %>

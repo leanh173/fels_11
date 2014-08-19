@@ -5,8 +5,13 @@
         <%= render "shared/user_info" %>
       </section>
     </aside>
-    <%= link_to "Word", words_path, class: "btn btn-large btn-primary" %>
-    <%= link_to "Lesson", categories_path, class: "btn btn-large btn-primary" %>
+    <% if current_user.admin %> 
+      <%= link_to "Add new question", new_admin_question_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "Word", admin_questions_path, class: "btn btn-large btn-primary" %>
+    <% else %>
+      <%= link_to "Word", questions_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "Lesson", categories_path, class: "btn btn-large btn-primary" %>
+    <% end %>
     <div class="span8">
       <h3>Activities</h3>
       <%= render "shared/feed" %>
