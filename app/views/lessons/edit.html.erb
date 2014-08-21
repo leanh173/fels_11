@@ -1,17 +1,25 @@
 <% provide(:title, 'Lesson') %>
 <h1>Lesson</h1>
 <ul class="lesson">
+  <% count = 1 %>
+  <input type="button" value="previous" onclick="show_previous()" id="previous-button">
+   <input type="button" value="next" onclick="show_next()" id="next-button">
   <%= form_for ([@category,@lesson]) do |f| %>
-    <% @questions.each do |question| %>
-      <li>
-        <%=question.content %>
-      </li>
-      <% question.answers.each do |answer| %>
-        <%= radio_button_tag "question_id[#{question.id}]", answer.id %>
-        <%= answer.content %><br>
-      <% end %>
+    <%= f.fields_for :user_answers do |builder| %>
+      <div class="question-form" id="q<%= count %>" data-order=<%= count %>>
+      <%=  "#{count}. #{builder.object.question.content}" %>
+      <% count += 1 %>
       <br>
+      <% builder.object.question.answers.each do |answer| %>        
+        <%= builder.radio_button :answer_id, answer.id %> 
+        <%= answer.content %>
+        <br>
+      <% end %>
+      <% builder.hidden_field :user_answer_id, value: builder.object.id %>
+      </div>
+    <br>
     <% end %>
+    <br>
     <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
   <% end %>
 </ul>

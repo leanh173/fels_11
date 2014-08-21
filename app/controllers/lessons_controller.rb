@@ -27,19 +27,19 @@ class LessonsController < ApplicationController
   def update
     lesson = Lesson.find params[:id]
     category = lesson.category
-    user_answers = lesson.user_answers
-    if params[:question_id]
-      params[:question_id].each do |question_id, answer_id|
-        user_answer = user_answers.find_by(question_id: question_id)
-        user_answer.update_attributes answer_id: answer_id
-      end
+    if lesson.update_attributes user_answers_params
+      flash[:success] = "your test has been submited"
+    else
+      flash[:error] = "error can not submit your test"
     end
-    lesson.update_attributes mark: 0
     redirect_to [category, lesson]
   end
 
   private
   def lesson_params
     params.require(:lesson).permit(:category_id)
+  end
+  def user_answers_params
+    params.require(:lesson).permit(user_answers_attributes:[:answer_id, :id])
   end
 end
